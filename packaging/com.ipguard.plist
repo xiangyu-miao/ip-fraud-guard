@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- macOS autostart (LaunchAgent).
+         Install:
+           cp packaging/com.ipguard.plist ~/Library/LaunchAgents/
+           launchctl load ~/Library/LaunchAgents/com.ipguard.plist
+         Remove:
+           launchctl unload ~/Library/LaunchAgents/com.ipguard.plist
+    -->
+    <key>Label</key>
+    <string>com.local.ipguard</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Applications/IPGuard.app/Contents/MacOS/IPGuard</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>

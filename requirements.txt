@@ -1,0 +1,10 @@
+# Runtime dependencies for IPGuard (Python >= 3.10)
+PySide6>=6.6,<7
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=4.9
+PySocks>=1.7
+
+# Build-only dependencies (installed automatically by the build scripts):
+#   pyinstaller>=6.3
+#   pillow>=10.0

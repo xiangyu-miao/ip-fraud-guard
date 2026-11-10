@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# IPGuard gate CLI wrapper (macOS/Linux)
+# Usage: ipguard-gate --max 20 && open "https://claude.ai" || echo "blocked"
+# Exit codes: 0=allowed 1=blocked 2=unknown
+set -euo pipefail
+cd "$(dirname "$0")/.."
+exec python3 -m ipguard.gate_cli "$@"

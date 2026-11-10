@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head><title>Scamalytics IP Check 1.2.3.4</title></head>
+<body>
+<!-- 结构与 scamalytics.com/ip/<ip> 真实页面一致（2026-11 验证） -->
+<div class="score_bar">
+  <div>0</div>
+  <div class="score">Fraud Score: 37</div>
+  <div>100</div>
+</div>
+<div class="panel_body">IP address <b>1.2.3.4</b> is operated by <b>M247 Europe SRL</b> whose
+<b>web traffic</b> we consider to present a potentially <b>high</b> fraud risk.</div>
+<table>
+  <!-- Operator -->
+  <tr><th class="title first" colspan="2">Operator</th></tr>
+  <tr><th>Hostname</th><td>route-1.2.3.4.m247.com</td></tr>
+  <tr><th>ASN</th><td>9009</td></tr>
+  <tr><th>ISP Name</th><td><a href="https://scamalytics.com/ip/isp/m247-europe-srl">M247 Europe SRL</a></td></tr>
+  <tr><th>Organization Name</th><td>M247 Europe SRL</td></tr>
+  <tr><th>Connection type</th><td>n/a</td></tr>
+  <!-- Location -->
+  <tr><th class="title" colspan="2">Location</th></tr>
+  <tr><th>Country Name</th><td>Netherlands</td></tr>
+  <tr><th>Country Code</th><td>NL</td></tr>
+  <tr><th>City</th><td>Amsterdam</td></tr>
+  <!-- Datacenter -->
+  <tr><th class="title" colspan="2">Datacenter</th></tr>
+  <tr><td colspan="2" class="subtitle">Does the connecting device reside in a datacenter?</td></tr>
+  <tr><td colspan="2"><div class="risk yes">Yes</div></td></tr>
+  <!-- Proxies -->
+  <tr><th class="title" colspan="2">Proxies</th></tr>
+  <tr><th>Anonymizing VPN</th><td><div class="risk no">No</div></td></tr>
+  <tr><th>Tor Exit Node</th><td><div class="risk no">No</div></td></tr>
+  <tr><th>Server</th><td><div class="risk yes">Yes</div></td></tr>
+</table>
+<!-- 页面内嵌的 IP Fraud Risk API 预览 JSON -->
+<pre>"ip":"1.2.3.4", "score":"37", "risk":"high", "is_blacklisted_external": false, ...</pre>
+</body>
+</html>
