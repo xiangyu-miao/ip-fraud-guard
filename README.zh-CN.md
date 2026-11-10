@@ -60,6 +60,7 @@ ip-fraud-guard/
 │   ├── ipprobe.py              # 外网 IP 多源探测（继承系统代理）
 │   ├── scamalytics.py          # Scamalytics 抓取 + 解析 + 磁盘缓存
 │   ├── monitor.py              # 后台监控线程（队列轮询，无忙等）
+│   ├── resume.py               # 睡眠/唤醒检测（QTimer 墙钟跳变）
 │   ├── floatwidget.py          # 无边框半透明悬浮窗（可拖拽）
 │   ├── trayicon.py             # 系统托盘图标 + 菜单
 │   ├── icons.py                # 运行时绘制彩色状态图标
@@ -70,7 +71,7 @@ ip-fraud-guard/
 │   ├── ipguard-gate            # CLI 封装（macOS/Linux）
 │   ├── ipguard-gate.cmd        # CLI 封装（Windows）
 │   └── tampermonkey_gate.user.js  # 油猴脚本示例
-├── tests/                      # 单元测试（解析器/分级/缓存/i18n）
+├── tests/                      # 单元测试（解析器/分级/缓存/i18n/唤醒检测）
 ├── packaging/                  # 打包脚本、图标生成、开机自启 plist
 ├── README.md                   # 英文说明
 └── README.zh-CN.md             # 本文件（中文）
@@ -232,6 +233,12 @@ IP 校验、缓存读写与损坏容错、中英文切换。
 - **只想用命令行门控，不想挂 GUI？** `python -m ipguard.gate_cli` 可完全独立使用。
 - **托盘点击没反应？** macOS 上设置上下文菜单后左键直接弹菜单，用菜单里的
   "显示/隐藏悬浮窗"即可。
+- **刘海屏 MacBook 上菜单栏图标不见了？** 图标其实还在：菜单栏图标太多时，
+  macOS 会把最左侧（最新加入）的图标挤到刘海下面，既看不见也点不到。
+  腾出约 40px（例如隐藏「聚焦」或输入法菜单栏图标）后圆点会露出来；
+  随后按住 ⌘ 把它拖到刘海右侧，避免以后再被挤进去。
+- **合盖后悬浮窗不见了？** 0.2.1 已修复：系统睡眠唤醒后会自动重新显示悬浮窗。
+  0.2.0 及更早版本需要重启 IPGuard，或用托盘菜单重新显示。
 
 ## 免责声明
 

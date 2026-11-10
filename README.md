@@ -68,6 +68,7 @@ ip-fraud-guard/
 │   ├── ipprobe.py              # external IP probing (multi-source, system proxy)
 │   ├── scamalytics.py          # Scamalytics scrape + parse + disk cache
 │   ├── monitor.py              # background monitor thread (queue polling)
+│   ├── resume.py               # sleep/wake detection (QTimer wall-clock gap)
 │   ├── floatwidget.py          # frameless translucent widget (draggable)
 │   ├── trayicon.py             # system tray icon + menu
 │   ├── icons.py                # runtime-drawn colored status icons
@@ -78,7 +79,7 @@ ip-fraud-guard/
 │   ├── ipguard-gate            # CLI wrapper (macOS/Linux)
 │   ├── ipguard-gate.cmd        # CLI wrapper (Windows)
 │   └── tampermonkey_gate.user.js  # userscript example
-├── tests/                      # unit tests (parser / bands / cache / i18n)
+├── tests/                      # unit tests (parser / bands / cache / i18n / resume)
 ├── packaging/                  # build scripts, icon generator, launchd plist
 ├── README.md                   # this file (English)
 └── README.zh-CN.md             # Chinese
@@ -260,6 +261,14 @@ tolerance, i18n switching.
 - **CLI only, no GUI?** `python -m ipguard.gate_cli` works standalone.
 - **Tray click does nothing?** On macOS, with a context menu set, clicking the
   tray icon opens the menu directly — use "Show/Hide widget".
+- **Tray icon missing on a notched MacBook?** The icon still exists: when the
+  menu bar is full, macOS pushes the leftmost (newest) items under the notch,
+  where they are invisible and unclickable. Free ~40 px (e.g. hide the
+  Spotlight or input-source menu bar item) and the dot slides out; then
+  ⌘-drag it to the right of the notch so it keeps priority.
+- **Widget gone after closing the lid?** Fixed in 0.2.1: the floating window
+  is re-shown automatically after system sleep. On 0.2.0 and older, relaunch
+  IPGuard or use the tray menu to show it again.
 
 ## Disclaimer
 
