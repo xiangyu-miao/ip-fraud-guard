@@ -24,6 +24,16 @@ command-line tool and a Tampermonkey userscript**.
 - **English / Chinese UI**, switchable from the tray or widget menu;
   defaults to the system language
 
+## Screenshots
+
+| Low risk (score 3) | Medium risk (score 25, over gate) | High risk (score 45) |
+|---|---|---|
+| ![widget low risk](docs/screenshots/widget-low.png) | ![widget medium risk](docs/screenshots/widget-medium.png) | ![widget high risk](docs/screenshots/widget-high.png) |
+
+Userscript blocking page:
+
+![warning page](docs/screenshots/warning-page.png)
+
 ## How it works
 
 ```

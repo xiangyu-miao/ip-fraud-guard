@@ -16,6 +16,16 @@
 - 托盘图标运行时绘制，无需图片资源；空闲内存约 40–60 MB（远低于 Electron 的 150MB+）
 - **界面中英文切换**：托盘或悬浮窗菜单里选择语言，默认跟随系统语言
 
+## 截图
+
+| 低风险（3 分） | 中风险（25 分，超过门控） | 高风险（45 分） |
+|---|---|---|
+| ![低风险悬浮窗](docs/screenshots/widget-low.png) | ![中风险悬浮窗](docs/screenshots/widget-medium.png) | ![高风险悬浮窗](docs/screenshots/widget-high.png) |
+
+油猴脚本拦截页：
+
+![拦截页面](docs/screenshots/warning-page.png)
+
 ## 工作原理
 
 ```
