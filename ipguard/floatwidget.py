@@ -247,6 +247,17 @@ class FloatWidget(QWidget):
             self.show()  # setWindowFlag hides the window on macOS; re-show it
         self._cfg.ui.always_on_top = on
 
+    def reveal(self) -> None:
+        """Force the window back on screen after system sleep.
+
+        macOS can order tool windows out while the display sleeps without
+        telling Qt; ``show()`` alone can be a no-op then, so hide first to
+        guarantee a fresh native map.
+        """
+        if self.isVisible():
+            self.hide()
+        self.show_default()
+
     def show_default(self) -> None:
         """Show at the remembered position, or bottom-right of the screen."""
         if self._cfg.ui.pos_x is not None and self._cfg.ui.pos_y is not None:

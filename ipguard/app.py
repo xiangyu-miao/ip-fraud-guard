@@ -19,6 +19,7 @@ from .ipprobe import IpProbe
 from .models import IpReport
 from .monitor import MonitorWorker
 from .notifier import Notifier
+from .resume import ResumeWatcher
 from .scamalytics import ScamalyticsScraper
 from .trayicon import TrayIcon
 
@@ -45,6 +46,11 @@ class Controller(QObject):
         self.tray = TrayIcon(cfg)
         self.notifier = Notifier(self.tray, cfg)
         self.worker = MonitorWorker(cfg, probe, scraper)
+        # User intent, independent of Qt's window state: macOS may order the
+        # window out on sleep while QWidget::isVisible() still reports True.
+        self._widget_visible = not cfg.ui.start_hidden
+        self._resume = ResumeWatcher(parent=self)
+        self._resume.resumed.connect(self._on_resume)
 
         # Monitor thread -> UI
         self.worker.report_ready.connect(self._on_report)
@@ -52,7 +58,7 @@ class Controller(QObject):
         self.worker.probe_error.connect(self._on_probe_error)
         # Floating widget
         self.widget.refresh_requested.connect(lambda: self.worker.refresh(force=True))
-        self.widget.hide_requested.connect(self.widget.hide)
+        self.widget.hide_requested.connect(self._hide_widget)
         self.widget.quit_requested.connect(self._app.quit)
         self.widget.top_toggled.connect(self._set_top)
         self.widget.language_selected.connect(self._set_language)
@@ -74,10 +80,12 @@ class Controller(QObject):
         if self._cfg.gate_server.enabled:
             self._start_gate()
         self.worker.start()
-        if not self._cfg.ui.start_hidden:
+        self._resume.start()
+        if self._widget_visible:
             self.widget.show_default()
 
     def _cleanup(self) -> None:
+        self._resume.stop()
         self.worker.stop()
         if not self.worker.wait(5000):
             self.worker.terminate()
@@ -101,11 +109,23 @@ class Controller(QObject):
         log.warning("%s", key)
         self.widget.show_notice(tr(key))
 
+    def _hide_widget(self) -> None:
+        self._widget_visible = False
+        self.widget.hide()
+
     def _toggle_widget(self) -> None:
-        if self.widget.isVisible():
-            self.widget.hide()
-        else:
+        self._widget_visible = not self._widget_visible
+        if self._widget_visible:
             self.widget.show_default()
+        else:
+            self.widget.hide()
+
+    def _on_resume(self) -> None:
+        # macOS orders tool windows out during sleep; bring ours back if the
+        # user did not explicitly hide it.
+        log.info("System resumed from sleep")
+        if self._widget_visible:
+            self.widget.reveal()
 
     def _set_top(self, on: bool) -> None:
         self.widget.set_always_on_top(on)
