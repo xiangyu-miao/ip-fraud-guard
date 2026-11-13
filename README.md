@@ -115,6 +115,7 @@ Config location (auto-created with defaults on first run):
 
 - macOS: `~/Library/Application Support/IPGuard/config.json`
 - Windows: `%APPDATA%\IPGuard\config.json`
+- Linux: `~/.config/IPGuard/config.json` (or `$XDG_CONFIG_HOME/IPGuard/config.json`)
 
 ```json
 {

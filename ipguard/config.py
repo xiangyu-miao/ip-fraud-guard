@@ -21,7 +21,7 @@ _DEFAULT_UA = (
 
 def default_config_path() -> Path:
     """Config location: macOS ~/Library/Application Support/IPGuard/config.json;
-    Windows %APPDATA%\\IPGuard\\config.json; Linux ~/.config/ipguard/config.json."""
+    Windows %APPDATA%\\IPGuard\\config.json; Linux ~/.config/IPGuard/config.json."""
     if sys.platform == "darwin":
         base = Path.home() / "Library" / "Application Support"
     elif sys.platform.startswith("win"):

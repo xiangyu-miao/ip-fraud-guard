@@ -106,6 +106,7 @@ python main.py
 
 - macOS：`~/Library/Application Support/IPGuard/config.json`
 - Windows：`%APPDATA%\IPGuard\config.json`
+- Linux：`~/.config/IPGuard/config.json`（或 `$XDG_CONFIG_HOME/IPGuard/config.json`）
 
 ```json
 {
